@@ -1,4 +1,5 @@
 language: java
+dist: trusty
 jdk:
 - oraclejdk8
 cache:
@@ -9,7 +10,7 @@ services:
 - docker
 notifications:
   email:
-  - carnell28@gmail.com
+  - bojidar@kajeteda.com
   on_success: always
   on_failure: always
 branches:
