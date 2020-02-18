@@ -1,20 +1,20 @@
-eurekaserver:
-   image:   kaloyan84/tmx-eurekasvr:${BUILD_NAME}
-   mem_limit: 1073741824
-   ports:
-       - "8761:8761"
-
-configserver:
+version: '2'
+services:
+  eurekaserver:
+    image:   kaloyan84/tmx-eurekasvr:${BUILD_NAME}
+    mem_limit: 1073741824
+    ports:
+      - "8761:8761"
+  configserver:
     image: kaloyan84/tmx-confsvr:${BUILD_NAME}
     #mem_limit: 1073741824
     mem_limit: 1000000000
     ports:
-       - "8888:8888"
+      - "8888:8888"
     environment:
-       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-       ENCRYPT_KEY:       "IMSYMMETRIC"
-
-zuulserver:
+      EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
+      ENCRYPT_KEY:       "IMSYMMETRIC"
+  zuulserver:
     image: kaloyan84/tmx-zuulsvr:${BUILD_NAME}
     mem_limit: 1073741824
     ports:
@@ -24,8 +24,7 @@ zuulserver:
       SERVER_PORT: "5555"
       CONFIGSERVER_URI: "http://configserver:8888"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
-
-licensingservice:
+  licensingservice:
     image: kaloyan84/tmx-licensing-service:${BUILD_NAME}
     mem_limit: 1073741824
     ports:
@@ -39,8 +38,7 @@ licensingservice:
       ZKSERVER_URI: "kafkaserver"
       AUTHSERVER_URI:   "http://authenticationservice:8901/user"
       ENCRYPT_KEY:       "IMSYMMETRIC"
-
-authenticationservice:
+  authenticationservice:
     image: kaloyan84/tmx-authentication-service:${BUILD_NAME}
     mem_limit: 1073741824
     ports:
@@ -51,8 +49,7 @@ authenticationservice:
       CONFIGSERVER_URI: "http://configserver:8888"
       EUREKASERVER_URI: "http://eurekaserver:8761/eureka/"
       ENCRYPT_KEY:       "IMSYMMETRIC"
-
-organizationservice:
+  organizationservice:
     image: kaloyan84/tmx-organization-service:${BUILD_NAME}
     mem_limit: 1073741824
     ports:
@@ -66,8 +63,7 @@ organizationservice:
       ZKSERVER_URI: "kafkaserver"
       AUTHSERVER_URI:   "http://authenticationservice:8901/user"
       ENCRYPT_KEY:       "IMSYMMETRIC"
-
-kafkaserver:
+  kafkaserver:
     image: spotify/kafka
     mem_limit: 1073741824
     ports:
