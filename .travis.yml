@@ -31,8 +31,8 @@ before_install:
 - export CONTAINER_IP=3.16.83.170
 - export PLATFORM_TEST_NAME="chapter10-platform-tests"
 script:
-#- sh travis_scripts/tag_build.sh
-#- sh travis_scripts/build_services.sh
-#S- sh travis_scripts/deploy_to_docker_hub.sh
+- sh travis_scripts/tag_build.sh
+- sh travis_scripts/build_services.sh
+- sh travis_scripts/deploy_to_docker_hub.sh
 - sh travis_scripts/deploy_to_amazon_ecs.sh
 # sh travis_scripts/trigger_platform_tests.sh
